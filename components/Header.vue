@@ -32,11 +32,13 @@
         </div>
         <nav class="w-1/6 flex justify-between font-Inter text-xl text-base-300">
             <nuxt-link to="/">Home</nuxt-link>
-            <nuxt-link to="/about">About</nuxt-link>
+            <nuxt-link to="/eventos">Eventos</nuxt-link>
             <nuxt-link to="/posts">Posts</nuxt-link>
         </nav>
         <div class="flex justify-between font-Inter text-xl text-base-300">
-            <button class="btn btn-ghost font-Inter text-xl text-base-300 mr-8"> Log in </button>
+            <nuxt-link to="/login" class="btn btn-ghost font-Inter text-xl text-base-300 mr-8">
+                Log in
+             </nuxt-link>
             <nuxt-link to="/cadastro" class="btn btn-outline font-Inter text-xl text-base-300">
                 Cadastre-se
             </nuxt-link>

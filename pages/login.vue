@@ -29,12 +29,11 @@
                     </clipPath>
                 </defs>
             </svg>
-            <img class="w-full h-full" src="../assets/img/backgrounds/registro.png" alt="">
-            <h1 class="absolute top-1/3 left-20 w-full text-7xl font-Inter font-bold text-start">Bem vindo <br> ao Stack
-                Fest</h1>
+            <img class="w-full h-full" src="../assets/img/backgrounds/login.png" alt="">
+            <h1 class="absolute top-1/3 left-20 w-full text-7xl font-Inter font-bold text-start">É bom ter <br> você de <br> volta!</h1>
         </div>
         <div class="w-7/12 h-full relative bg-base">
-            <p class="text-7xl font-Inter font-bold text-secondary text-center mt-28 mb-12">Cadastre-se</p>
+            <p class="text-7xl font-Inter font-bold text-secondary text-center mt-28 mb-12">Log in</p>
             <form class="w-1/2 mx-auto p-8 rounded-xl bg-neutral">
                 <div>
                     <label class="label">
@@ -45,26 +44,12 @@
 
                 <div class="mt-4">
                     <label class="label">
-                        <span class="label-textfont-Inter text-2xl text-primary">Email</span>
-                    </label>
-                    <input class="w-full input input-bordered rounded-xl" type="email" v-model="form.email" required />
-                </div>
-
-                <div class="mt-4">
-                    <label class="label">
-                        <span class="label-text font-Inter text-2xl text-primary">Telefone</span>
-                    </label>
-                    <input class="w-full input input-bordered rounded-xl" type="tel" v-model="form.telephone" required />
-                </div>
-
-                <div class="mt-4">
-                    <label class="label">
                         <span class="label-text font-Inter text-2xl text-primary">Senha</span>
                     </label>
                     <input class="w-full input input-bordered rounded-xl" type="password" v-model="form.password"
                         required />
                 </div>
-                <button class="mt-12 btn btn-block btn-primary text-3xl font-Inter font-bold btn-lg">Criar</button>
+                <button class="mt-12 btn btn-block btn-primary text-3xl font-Inter font-bold btn-lg">Entrar</button>
             </form>
         </div>
     </div>
@@ -75,8 +60,6 @@
             return {
                 form: {
                     name: '',
-                    email: '',
-                    telephone: '',
                     password: '',
                 },
             }

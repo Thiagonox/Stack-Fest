@@ -17,9 +17,9 @@ export default defineNuxtConfig({
       component: '~/pages/index.vue'
     },
     {
-      name: 'about',
-      path: '/about',
-      component: '~/pages/about.vue'
+      name: 'eventos',
+      path: '/eventos',
+      component: '~/pages/eventos.vue'
     },
     {
       name: '404',
