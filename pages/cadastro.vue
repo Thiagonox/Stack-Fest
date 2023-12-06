@@ -73,38 +73,38 @@
 import axios from 'axios';
 
 export default {
-  data() {
-    return {
-      form: {
-        name: '',
-        password: '',
-        email: '',
-        phone: '',
-      },
-    };
-  },
-  methods: {
-    async registerUser() {
-      try {
-        // Enviar solicitação POST para o endpoint de registro
-        const response = await axios.post('https://stack-fest-backend-80a48e37e6c8.herokuapp.com/api/v1/users/register', this.form);
-
-        // Verificar se a resposta contém um token
-        if (response.data.token) {
-          // Salvar o token no Local Storage
-          localStorage.setItem('token', response.data.token);
-
-          // Redirecionar ou executar outras ações após o registro bem-sucedido
-          console.log('Usuário registrado com sucesso!');
-        } else {
-          // Lidar com casos em que não há token na resposta
-          console.error('Erro ao registrar o usuário. Token não encontrado na resposta.');
-        }
-      } catch (error) {
-        // Lidar com erros na solicitação
-        console.error('Erro na solicitação de registro:', error.message);
-      }
+    data() {
+        return {
+            form: {
+                name: '',
+                password: '',
+                email: '',
+                phone: '',
+            },
+        };
     },
-  },
+    methods: {
+        async registerUser() {
+            try {
+                // Enviar solicitação POST para o endpoint de registro
+                const response = await axios.post('https://stack-fest-backend-80a48e37e6c8.herokuapp.com/api/v1/users/register', this.form);
+
+                // Verificar se a resposta contém um token
+                if (response.data.token) {
+                    // Salvar o token no Local Storage
+                    localStorage.setItem('token', response.data.token);
+
+                    // Redirecionar para a página de login
+                    this.$router.push('/login');
+                } else {
+                    // Lidar com casos em que não há token na resposta
+                    console.error('Erro ao registrar o usuário. Token não encontrado na resposta.');
+                }
+            } catch (error) {
+                // Lidar com erros na solicitação
+                console.error('Erro na solicitação de registro:', error.message);
+            }
+        },
+    },
 };
 </script>
