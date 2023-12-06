@@ -3,7 +3,7 @@
         <div v-if="showModal" class="fixed inset-0 flex items-center justify-center">
             <div class="bg-base-300 p-8 rounded-lg w-1/3">
                 <h2 class="text-2xl font-bold mb-4">Cadastro de Empresa</h2>
-                <form @submit.prevent="submitForm" class="">
+                <form @submit.prevent="modalClose" class="">
                     <div class="mb-4">
                         <label for="name" class="block mb-2">Nome</label>
                         <input v-model="empresa.name" type="text" id="name" class="w-full input input-bordered rounded-xl">
@@ -14,11 +14,13 @@
                     </div>
                     <div class="mb-4">
                         <label for="email" class="block mb-2">Email</label>
-                        <input v-model="empresa.email" type="email" id="email" class="w-full input input-bordered rounded-xl">
+                        <input v-model="empresa.email" type="email" id="email"
+                            class="w-full input input-bordered rounded-xl">
                     </div>
                     <div class="mb-4">
                         <label for="phone" class="block mb-2">Telefone</label>
-                        <input v-model="empresa.phone" type="text" id="phone" class="w-full input input-bordered rounded-xl">
+                        <input v-model="empresa.phone" type="text" id="phone"
+                            class="w-full input input-bordered rounded-xl">
                     </div>
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>
@@ -33,35 +35,41 @@
                 </div>
                 <div class="bg-base-300 p-8 rounded-lg w-1/3">
                     <h2 class="text-2xl font-bold mb-4">Criar Evento</h2>
-                    <form>
+                    <form @submit.prevent="submitAndPush">
                         <div class="mb-4">
                             <label for="eventName" class="block mb-2">Nome do Evento</label>
-                            <input v-model="evento.eventName" type="text" id="eventName" class="w-full input input-bordered rounded-xl">
+                            <input v-model="evento.eventName" type="text" id="eventName"
+                                class="w-full input input-bordered rounded-xl">
                         </div>
                         <div class="mb-4">
                             <label for="eventDate" class="block mb-2">Data do Evento</label>
-                            <input v-model="evento.eventDate" type="date" id="eventDate" class="w-full input input-bordered rounded-xl">
+                            <input v-model="evento.eventDate" type="date" id="eventDate"
+                                class="w-full input input-bordered rounded-xl">
                         </div>
                         <div class="mb-4">
                             <label for="eventDescription" class="block mb-2">Descrição do Evento</label>
-                            <textarea v-model="evento.eventDescription" id="eventDescription" class="w-full textarea textarea-bordered rounded-xl"></textarea>
+                            <textarea v-model="evento.eventDescription" id="eventDescription"
+                                class="w-full textarea textarea-bordered rounded-xl"></textarea>
                         </div>
                         <div class="mb-4">
                             <label for="totalTickets" class="block mb-2">Total de Tickets</label>
-                            <input v-model="evento.totalTickets" type="number" id="totalTickets" class="w-full input input-bordered rounded-xl">
+                            <input v-model="evento.totalTickets" type="number" id="totalTickets"
+                                class="w-full input input-bordered rounded-xl">
                         </div>
                         <div class="mb-4">
                             <label for="totalTickets" class="block mb-2">Preço</label>
-                            <input v-model="evento.preco" type="number" id="totalTickets" class="w-full input input-bordered rounded-xl">
+                            <input v-model="evento.preco" type="number" id="totalTickets"
+                                class="w-full input input-bordered rounded-xl">
                         </div>
                         <div class="mb-4">
                             <label for="eventAddress" class="block mb-2">Endereço do Evento</label>
                             <input v-if="!evento.eventLink" v-model="evento.eventAddress" type="text" id="eventAddress"
-                            class="w-full input input-bordered rounded-xl">
+                                class="w-full input input-bordered rounded-xl">
                         </div>
                         <div class="mb-4">
                             <label for="eventLink" class="block mb-2">Link do Evento</label>
-                            <input v-if="!evento.eventAddress" v-model="evento.eventLink" type="text" id="eventLink" class="w-full input input-bordered rounded-xl">
+                            <input v-if="!evento.eventAddress" v-model="evento.eventLink" type="text" id="eventLink"
+                                class="w-full input input-bordered rounded-xl">
                         </div>
                         <button type="submit" class="btn btn-primary">Criar Evento</button>
                     </form>
@@ -72,6 +80,8 @@
 </template>
   
 <script>
+import axios from 'axios';
+
 export default {
     data() {
         return {
@@ -97,9 +107,30 @@ export default {
         };
     },
     methods: {
-        submitForm() {
+        modalClose() {
             this.showModal = false;
             this.showForm = true;
+        },
+        submitForm() {
+
+            // Enviar dados do formulário de empresa
+            axios.post('/api/empresa', this.empresa)
+                .then(response => {
+                    // Lógica de sucesso
+                })
+                .catch(error => {
+                    // Lógica de erro
+                });
+
+            // Enviar dados do formulário de evento
+            axios.post('/api/evento', this.evento)
+                .then(response => {
+                    // Lógica de sucesso
+                })
+                .catch(error => {
+                    // Lógica de erro
+                });
+
         },
         nextStep() {
             if (this.currentStep < this.indicators.length - 1) {
@@ -108,6 +139,10 @@ export default {
                 // Lógica para finalizar o carrossel ou executar ação após a última etapa
             }
         },
+        submitAndPush() {
+        this.submitForm();
+        this.$router.push({ name: 'home' });
+    },
     },
 };
 </script>
@@ -121,5 +156,4 @@ export default {
 .form-transition-enter,
 .form-transition-leave-to {
     opacity: 0;
-}
-</style>
+}</style>

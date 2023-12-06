@@ -64,7 +64,8 @@
                     <input class="w-full input input-bordered rounded-xl" type="password" v-model="form.password"
                         required />
                 </div>
-                <button @click="registerUser" class="mt-12 btn btn-block btn-primary text-3xl font-Inter font-bold btn-lg">Criar</button>
+                <button @click="registerUser"
+                    class="mt-12 btn btn-block btn-primary text-3xl font-Inter font-bold btn-lg">Criar</button>
             </form>
         </div>
     </div>
@@ -87,14 +88,14 @@ export default {
         async registerUser() {
             try {
                 // Enviar solicitação POST para o endpoint de registro
-                const response = await axios.post('https://stack-fest-backend-80a48e37e6c8.herokuapp.com/api/v1/users/register', this.form);
+                const response = await axios.post('https://stack-fest-backend-80a48e37e6c8.herokuapp.com/api/v1/users/register', this.form, { timeout: 5000 });
 
                 // Verificar se a resposta contém um token
                 if (response.data.token) {
                     // Salvar o token no Local Storage
                     localStorage.setItem('token', response.data.token);
 
-                    // Redirecionar para a página de login
+                    // Redirecionar para a página desejada (exemplo: página de login)
                     this.$router.push('/login');
                 } else {
                     // Lidar com casos em que não há token na resposta
