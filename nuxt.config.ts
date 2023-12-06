@@ -12,6 +12,16 @@ export default defineNuxtConfig({
       component: '~/pages/login.vue'
     },
     {
+      name: 'home',
+      path: '/home',
+      component: '~/pages/home.vue'
+    },
+    {
+      name: 'criar-evento',
+      path: '/criar-evento',
+      component: '~/pages/criar-evento.vue'
+    },
+    {
       name: 'index',
       path: '/',
       component: '~/pages/index.vue'
