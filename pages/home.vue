@@ -32,7 +32,7 @@
         </div>
         <nav class="flex justify-between font-Inter text-xl text-base-300">
             <nuxt-link class="mr-8" to="/eventos">Eventos</nuxt-link>
-            <nuxt-link to="/criar">Criar</nuxt-link>
+            <nuxt-link to="/criar-evento">Criar</nuxt-link>
         </nav>
         <div class="w-12 rounded-full bg-primary p-2">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" id="user">
@@ -56,17 +56,39 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="text-2xl">
-                                Hart Hagerty
-                            </td>
-                            <td class="text-2xl">
-                                Zemlak, Daniel and Leannon
-                            </td>
-                            <td class="text-2xl">Purple</td>
+                        <tr v-for="evento in eventos" :key="evento.id">
+                            <td class="text-2xl">{{ evento.name }}</td>
+                            <td class="text-2xl">{{ evento.data }}</td>
+                            <td class="text-2xl">{{ evento.totalIngressos }}</td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
         </div>
-    </div>
-</body></template>
+    </body>
+</template>
+<script>
+import axios from 'axios';
+
+export default {
+    data() {
+        return {
+            eventos: [],
+        };
+    },
+    mounted() {
+        this.fetchEventos();
+    },
+    methods: {
+        fetchEventos() {
+            axios.get('/api/eventos')
+                .then(response => {
+                    this.eventos = response.data;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
+    },
+};
+</script>

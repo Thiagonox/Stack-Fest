@@ -54,7 +54,7 @@
                     <label class="label">
                         <span class="label-text font-Inter text-2xl text-primary">Telefone</span>
                     </label>
-                    <input class="w-full input input-bordered rounded-xl" type="tel" v-model="form.telephone" required />
+                    <input class="w-full input input-bordered rounded-xl" type="tel" v-model="form.phone" required />
                 </div>
 
                 <div class="mt-4">
@@ -64,23 +64,47 @@
                     <input class="w-full input input-bordered rounded-xl" type="password" v-model="form.password"
                         required />
                 </div>
-                <button class="mt-12 btn btn-block btn-primary text-3xl font-Inter font-bold btn-lg">Criar</button>
+                <button @click="registerUser" class="mt-12 btn btn-block btn-primary text-3xl font-Inter font-bold btn-lg">Criar</button>
             </form>
         </div>
     </div>
 </template>
 <script>
-    export default {
-        data() {
-            return {
-                form: {
-                    name: '',
-                    email: '',
-                    telephone: '',
-                    password: '',
-                },
-            }
-        },
-    }
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      form: {
+        name: '',
+        password: '',
+        email: '',
+        phone: '',
+      },
+    };
+  },
+  methods: {
+    async registerUser() {
+      try {
+        // Enviar solicitação POST para o endpoint de registro
+        const response = await axios.post('https://stack-fest-backend-80a48e37e6c8.herokuapp.com/api/v1/users/register', this.form);
+
+        // Verificar se a resposta contém um token
+        if (response.data.token) {
+          // Salvar o token no Local Storage
+          localStorage.setItem('token', response.data.token);
+
+          // Redirecionar ou executar outras ações após o registro bem-sucedido
+          console.log('Usuário registrado com sucesso!');
+        } else {
+          // Lidar com casos em que não há token na resposta
+          console.error('Erro ao registrar o usuário. Token não encontrado na resposta.');
+        }
+      } catch (error) {
+        // Lidar com erros na solicitação
+        console.error('Erro na solicitação de registro:', error.message);
+      }
+    },
+  },
+};
 </script>
-  
