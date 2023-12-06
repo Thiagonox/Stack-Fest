@@ -88,7 +88,12 @@ export default {
         async registerUser() {
             try {
                 // Enviar solicitação POST para o endpoint de registro
-                const response = await axios.post('https://stack-fest-backend-80a48e37e6c8.herokuapp.com/api/v1/users/register', this.form, { timeout: 5000 });
+                axios.post('https://stack-fest-backend-80a48e37e6c8.herokuapp.com/api/v1/users/register', {
+                    name: this.form.name,
+                    email: this.form.email,
+                    password: this.form.password,
+                    phone: this.form.phone,
+                })
 
                 // Verificar se a resposta contém um token
                 if (response.data.token) {
