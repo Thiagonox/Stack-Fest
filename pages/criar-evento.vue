@@ -79,13 +79,13 @@
                     <input type="date" id="eventDate" v-model="eventoForm.date" class="input" required>
 
                     <label for="eventDescription" class="label">Descrição do Evento:</label>
-                    <textarea id="eventDescription" v-model="eventoForm.description" class="input" required></textarea>
+                    <textarea id="eventDescription" v-model="eventoForm.description" class="input"></textarea>
 
                     <label for="totalTickets" class="label">Total de Ingressos:</label>
                     <input type="number" id="totalTickets" v-model="eventoForm.totalTickets" class="input" required>
 
                     <label for="eventType" class="label">Tipo de Evento:</label>
-                    <select id="eventType" v-model="eventoForm.eventType" class="input" required>
+                    <select id="eventType" v-model="eventoForm.eventType" class="input">
                         <option value="presencial">Presencial</option>
                         <option value="online">Online</option>
                     </select>
@@ -146,6 +146,7 @@ export default {
                 name: '',
                 date: '',
                 totalTickets: '',
+                eventType: 'online',
             },
         };
     },
