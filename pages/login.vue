@@ -49,21 +49,35 @@
                     <input class="w-full input input-bordered rounded-xl" type="password" v-model="form.password"
                         required />
                 </div>
-                <button class="mt-12 btn btn-block btn-primary text-3xl font-Inter font-bold btn-lg">Entrar</button>
+                <button @click="login" class="mt-12 btn btn-block btn-primary text-3xl font-Inter font-bold btn-lg">Entrar</button>
             </form>
         </div>
     </div>
 </template>
 <script>
+import axios from 'axios';
+
     export default {
         data() {
             return {
                 form: {
                     name: '',
-                    password: '',
-                },
+                    password: ''
+                }
             }
         },
+        methods: {
+            login() {
+                axios.post('https://stack-fest-backend-80a48e37e6c8.herokuapp.com/api/v1/users/login', this.form)
+                    .then(res => {
+                        localStorage.setItem('token', res.data.token)
+                        this.$router.push('/home')
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            }
+        }
     }
 </script>
   
